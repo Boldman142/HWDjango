@@ -1,9 +1,9 @@
 from django.urls import path
 
-from catalog.views import catalog_list
+from catalog.views import index
 
 app_name = 'catalog'
 
 urlpatterns = [
-    path('', catalog_list, name='catalog')
+    path('', index, name='catalog')
 ]
