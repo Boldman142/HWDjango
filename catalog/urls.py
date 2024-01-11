@@ -8,5 +8,5 @@ app_name = 'catalog'
 
 urlpatterns = [
     path('', index, name='catalog'),
-    path('', contact_view, name='contact')
+    path('contacts/', contact_view, name='contact')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
