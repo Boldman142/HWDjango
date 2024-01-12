@@ -1,12 +1,13 @@
 from django.urls import path
-from django.conf.urls.static import static
-from django.conf import settings
 
-from catalog.views import index, contact_view
 
-app_name = 'catalog'
+from catalog.apps import CatalogConfig
+from catalog.views import index, contact_view, product
+
+app_name = CatalogConfig.name
 
 urlpatterns = [
     path('', index, name='catalog'),
-    path('contacts/', contact_view, name='contact')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('contacts/', contact_view, name='contact'),
+    path('<int:pk>product/', product, name='product')
+]

@@ -9,10 +9,13 @@
                 <h4 class="my-0 font-weight-normal">{{ item.name }}</h4>
             </div>
             <div class="card-body">
+                <img src="/media/{{item.picture}}" alt="..." class="img-thumbnail">
+                <h1 class="card-title pricing-card-title">{{ item.price }}₽</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li>{{ item.overview }}</li>
+                    <li>- {{ item.overview }}</li>
+
                 </ul>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product' item.pk %}">Выбрать</a>
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
             </div>
         </div>
     </div>
