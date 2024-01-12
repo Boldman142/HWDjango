@@ -3,4 +3,4 @@ from django.core.management import BaseCommand
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        print('Hi, Sky!')
+        print('python manage.py dumpdata catalog > data.json')
