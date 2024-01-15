@@ -30,5 +30,10 @@ def contact_view(request):
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         print(f'{name} {phone} {message}')
-        return [name, phone, message]
+        context['post'] = {
+            'name_user': name,
+            'phone_user': phone,
+            'message_user': message
+        }
+
     return render(request, 'catalog/contact.html', context)

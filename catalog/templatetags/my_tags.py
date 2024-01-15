@@ -2,7 +2,12 @@ from django import template
 
 register = template.Library()
 
-#
-# @register.filter(needs_autoescape=True)
-# def mediapath(path):
-#     return / media / path
+
+# @register.filter
+# def mediapath(file):
+#     return "/media/{{file}}"
+
+
+@register.simple_tag
+def mediapath(file):
+    return file.url
