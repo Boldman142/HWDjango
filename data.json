@@ -1,0 +1,91 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Говядина",
+      "overview": "коровятина",
+      "picture": "catalog/Без_названия.jpg",
+      "category": 1,
+      "price": 300,
+      "date_create": "2024-01-11T11:38:21.633Z",
+      "date_change": "2024-01-12T13:22:26.637Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Пельмени",
+      "overview": "пища богов",
+      "picture": "catalog/yr85idltllgw1hfsgmbqf8dbfhde515n.jpg",
+      "category": 2,
+      "price": 200,
+      "date_create": "2024-01-11T11:38:38.877Z",
+      "date_change": "2024-01-12T13:25:17.967Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Кура",
+      "overview": "не птица",
+      "picture": "catalog/76630582-727x522.jpg",
+      "category": 1,
+      "price": 150,
+      "date_create": "2024-01-11T11:45:29.502Z",
+      "date_change": "2024-01-12T13:24:42.247Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Морковь",
+      "overview": "Длинная и оранжевая",
+      "picture": "catalog/1736135954_0_188_3072_1916_1920x0_80_0_0_d0264c42d6166d2821602edf39fab775.jpg",
+      "category": 3,
+      "price": 50,
+      "date_create": "2024-01-12T13:06:31.614Z",
+      "date_change": "2024-01-12T13:26:23.961Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Свинина",
+      "overview": "Свинячье, свежее, еще утром хрюкало",
+      "picture": "catalog/свиее.jpg",
+      "category": 1,
+      "price": 300,
+      "date_create": "2024-01-12T13:09:24.457Z",
+      "date_change": "2024-01-12T13:26:16.425Z"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "мясо",
+      "overview": "всякое мясцо"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "заморозка",
+      "overview": "холодное"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "сырое",
+      "overview": "овощи"
+    }
+  }
+]
