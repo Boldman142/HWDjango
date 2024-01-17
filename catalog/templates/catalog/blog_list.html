@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+{% block context%}
+<div class="row text-center">
+    <a class="btn btn-lg btn-block btn-outline-primary"  href="{% url 'catalog:blog_create' %}">Написать</a>
+
+    {% for item in object_list %}
+    <div class="col-3">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">{{ item.slug }}</h4>
+            </div>
+            <div class="card-body">
+
+                <h1 class="card-title pricing-card-title">{{ item.name }}</h1>
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li>- {{ item.message }}</li>
+                </ul>
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li> дата создания - {{ item.date_create }}</li>
+                </ul>
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <li> число просмотров - {{ item.count_view }}</li>
+                </ul>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post' item.id %}">Читать</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView, ListView, CreateView
 from django.urls import reverse_lazy
 
-from catalog.models import Category, Product  # , Contact
+from catalog.models import Category, Product, Blog
 
 
 class CategoryListView(ListView):
@@ -37,8 +37,26 @@ class ProductListView(ListView):
         return context_data
 
 
-# class ContactListView(ListView):
-#     model = Contact
+class BlogListView(ListView):
+    model = Blog
+    extra_context = {
+        'title': 'Блог, не понятно зачем'
+    }
+
+
+class BlogDetailView(DetailView):
+    model = Blog
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(id=self.kwargs.get('id'))
+        return queryset
+
+
+class BlogCreateView(CreateView):
+    model = Blog
+    fields = ('name', 'message',)
+    success_url = reverse_lazy('catalog:blog')
 
 
 def contact_view(request):
