@@ -36,7 +36,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     name = models.CharField(max_length=150, verbose_name='Заголовок')
-    slug = 'CharField'
+    slug = models.CharField(max_length=150, verbose_name='slug', **NULLABLE)
     message = models.TextField(verbose_name='Сообщение')
     preview = models.ImageField(upload_to='catalog/', **NULLABLE)
     date_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
