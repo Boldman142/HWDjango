@@ -20,12 +20,12 @@ class ProductCreateView(CreateView):
 
 
 class ProductDetailView(DetailView):
-    modem = Product
+    model = Product
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(id=self.kwargs.get('id'))
-        return queryset
+    # def get_queryset(self, *args, **kwargs):
+    #     queryset = super().get_queryset(*args, **kwargs)
+    #     queryset = queryset.filter(id=self.kwargs.get('id'))
+    #     return queryset
 
 
 class ProductListView(ListView):
