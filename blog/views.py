@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from pytils.translit import slugify
 
 from blog.models import Blog
+from blog.services import send
 
 
 class BlogCreateView(CreateView):
@@ -56,6 +57,8 @@ class BlogDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.count_view += 1
         self.object.save()
+        if self.object.count_view == 100:
+            send()
         return self.object
 
 

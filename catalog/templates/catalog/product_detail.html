@@ -9,7 +9,9 @@
                 <h4 class="my-0 font-weight-normal">{{ object.name }}</h4>
             </div>
             <div class="card-body">
-                <img src="{% mediapath object.picture %}" alt="..." class="img-thumbnail">
+                {% if item.picture %}
+                    <img src="{% mediapath object.picture %}" alt="..." class="img-thumbnail">
+                {% endif %}
                 <h1 class="card-title pricing-card-title">{{ object.price }}₽</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                     <li>- {{ object.overview }}</li>
