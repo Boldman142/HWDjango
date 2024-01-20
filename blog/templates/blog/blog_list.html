@@ -3,7 +3,7 @@
 
 {% block context%}
 <div class="col-12">
-    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:blog_create' %}">Написать</a>
+    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_create' %}">Написать</a>
 </div>
 <div class="row">
     <div class="col-6">
@@ -26,13 +26,13 @@
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                     <li> число просмотров - {{ item.count_view }}</li>
                 </ul>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post' item.pk %}">Читать</a>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:blog_change' item.pk %}">Изменить</a>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:post_delete' item.pk %}">Удалить</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post' item.pk %}">Читать</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_change' item.pk %}">Изменить</a>
+                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_delete' item.pk %}">Удалить</a>
                 {% if item.published %}
-                    <a class="btn btn-lg btn-danger btn-block" href="{% url 'catalog:change_publish' item.pk %}">Не публиковать</a>
+                    <a class="btn btn-lg btn-danger btn-block" href="{% url 'blog:change_publish' item.pk %}">Не публиковать</a>
                 {% else %}
-                    <a class="btn btn-lg btn-success btn-block" href="{% url 'catalog:change_publish' item.pk %}">Опубликовать</a>
+                    <a class="btn btn-lg btn-success btn-block" href="{% url 'blog:change_publish' item.pk %}">Опубликовать</a>
                 {% endif %}
             </div>
         </div>

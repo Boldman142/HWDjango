@@ -11,7 +11,7 @@
                             {% csrf_token %}
                             <p>Хотите удалить заипись "{{ object.name }}"?</p>
                             <button class="p-2 btn btn-outline-primary" type="submit">Подтвердить</button>
-                            <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:blog' %}">Отмена</a>
+                            <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog' %}">Отмена</a>
                         </form>
                     </div>
                 </div>
