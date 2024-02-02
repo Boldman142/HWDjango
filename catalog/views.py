@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
-
+from catalog.forms import ProductForm
 from catalog.models import Category, Product
 
 
@@ -15,17 +15,18 @@ class CategoryListView(ListView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'overview', 'category', 'price',)
+    form_class = ProductForm
+    success_url = reverse_lazy('catalog:catalog')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
 
 
 class ProductDetailView(DetailView):
     model = Product
-
-    # def get_queryset(self, *args, **kwargs):
-    #     queryset = super().get_queryset(*args, **kwargs)
-    #     queryset = queryset.filter(id=self.kwargs.get('id'))
-    #     return queryset
 
 
 class ProductListView(ListView):
@@ -44,6 +45,9 @@ class ProductListView(ListView):
         return context_data
 
 
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:catalog')
 
 
 def contact_view(request):
@@ -63,5 +67,3 @@ def contact_view(request):
         }
 
     return render(request, 'catalog/contact_list.html', context)
-
-

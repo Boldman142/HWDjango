@@ -4,6 +4,20 @@ from django.db.models import SET_NULL, PROTECT
 NULLABLE = {'null': True, 'blank': True}
 
 
+class Version(models.Model):
+    product = models.ForeignKey('Product', verbose_name='Продукт', on_delete=models.CASCADE)
+    num_version = models.IntegerField(auto_created=True, verbose_name='Номер версии', unique=True)
+    name = models.CharField(max_length=150, verbose_name='Название версии')
+    sign = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Версия'
+        verbose_name_plural = 'Версии'
+
+
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='Наименование')
     overview = models.TextField(verbose_name='Описание')
@@ -14,7 +28,7 @@ class Product(models.Model):
     date_change = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name} {self.price} {self.category}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'продукт'
@@ -32,6 +46,3 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
-
-
-

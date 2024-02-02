@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
-                            <p>Хотите удалить заипись "{{ object.name }}"?</p>
+                            <p>Хотите удалить запись "{{ object.name }}"?</p>
                             <button class="p-2 btn btn-outline-primary" type="submit">Подтвердить</button>
                             <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog' %}">Отмена</a>
                         </form>
