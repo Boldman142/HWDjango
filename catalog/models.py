@@ -6,9 +6,9 @@ NULLABLE = {'null': True, 'blank': True}
 
 class Version(models.Model):
     product = models.ForeignKey('Product', verbose_name='Продукт', on_delete=models.CASCADE)
-    num_version = models.IntegerField(auto_created=True, verbose_name='Номер версии', unique=True)
+    num_version = models.IntegerField(auto_created=True, verbose_name='Номер версии')
     name = models.CharField(max_length=150, verbose_name='Название версии')
-    sign = models.BooleanField(default=True)
+    sign = models.BooleanField(default=False, verbose_name='В наличии')
 
     def __str__(self):
         return self.name
@@ -16,6 +16,7 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'Версия'
         verbose_name_plural = 'Версии'
+        unique_together = (('product', 'num_version'),)
 
 
 class Product(models.Model):

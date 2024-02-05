@@ -2,16 +2,20 @@
 {% load my_tags %}
 
 {% block context%}
-<div class="row text-center">
-    <div class="col-3">
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">
-                    {{ object.name }}
-                </h4>
-            </div>
-            <div class="card-body">
-                <form method="post">
+<form method="post">
+    <div class="row">
+        <div class="col-4 ">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header  text-center">
+                    <h4 class="my-0 font-weight-normal">
+                        {% if object %}
+                            {{ object.name }}
+                        {% else %}
+                            Добавить продукт
+                        {% endif %}
+                    </h4>
+                </div>
+                <div class="card-body">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button class="btn btn-lg btn-block btn-outline-primary" type="submit">
@@ -22,10 +26,30 @@
                         {% endif %}
                     </button>
                     <h4></h4>
-                </form>
-                <button class="btn btn-lg btn-block btn-outline-primary" type="button">Купить</button>
+                    <button class="btn btn-lg btn-block btn-outline-primary" type="button">Купить</button>
+                </div>
             </div>
         </div>
+        {% if object %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header  text-center">
+                    <h4 class="my-0 font-weight-normal">
+                        Версии продукта
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {{ formset.management_form }}
+                    {% for form in formset.forms %}
+                    {{ form.as_p }}
+                        {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
-</div>
+</form>
 {% endblock %}
