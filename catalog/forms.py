@@ -39,3 +39,23 @@ class VersionForm(StyleForMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
+
+    def clean_sign(self):
+        cleaned_data = self.cleaned_data.get('sign')
+        # return cleaned_data
+
+        if cleaned_data and self.instance.product.version_set.filter(sign=True).exclude(
+                id=self.instance.id).exists():
+            raise forms.ValidationError('Может существовать только одна активная версия!')
+
+        return cleaned_data
+
+    # def clean_sign(self):
+    #     cleaned_data = self.cleaned_data.get('sign')
+    #     num_true = Version.objects.all().filter(product_id=self.get_object().id)
+    #     numm = 0
+    #     for i in num_true:
+    #         if i.sign:
+    #             numm += 1
+    #     if numm > 1:
+    #         raise forms.ValidationError(f'Увы, не больше одного варианта в наличии')

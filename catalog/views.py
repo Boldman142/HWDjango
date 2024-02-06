@@ -43,14 +43,14 @@ class ProductUpdateView(UpdateView):
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-        num_true = Version.objects.all().filter(product_id=self.get_object().id)
-        numm = 0
-        for i in num_true:
-            if i.sign:
-                numm += 1
-        if numm > 1:
-            raise forms.ValidationError(f'Увы, не больше одного варианта в наличии') #Как бы сделать, чтобы как клин
-            # метод в формах, просто не пускал так сделать, а не ронял все
+        # num_true = Version.objects.all().filter(product_id=self.get_object().id)
+        # numm = 0
+        # for i in num_true:
+        #     if i.sign:
+        #         numm += 1
+        # if numm > 1:
+        #     raise forms.ValidationError(f'Увы, не больше одного варианта в наличии') #Как бы сделать, чтобы как клин
+        #     # метод в формах, просто не пускал так сделать, а не ронял все
         return super().form_valid(form)
 
 
@@ -70,6 +70,13 @@ class ProductListView(ListView):
         prod_type = Category.objects.get(pk=self.kwargs.get('pk'))
         context_data = super().get_context_data(*args, **kwargs)
         context_data['title'] = f'Все что есть из {prod_type.name}'
+        #
+        # products = Product.objects.all()
+        # version_all = Version.object.all().filter(product_id=self.get_object().id)
+        # for product in products:
+        #     product.active_version = product.versions.filter(is_active=True).first()
+        # context_data['products'] = products
+
 
         return context_data
 
