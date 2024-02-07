@@ -25,6 +25,9 @@
                             Добавить
                         {% endif %}
                     </button>
+                    {% if object %}
+                        <a class="btn btn-lg btn-block btn-outline-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить</a>
+                    {% endif %}
                     <h4></h4>
                     <button class="btn btn-lg btn-block btn-outline-primary" type="button">Купить</button>
                 </div>

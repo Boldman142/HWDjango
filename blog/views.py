@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from pytils.translit import slugify
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.decorators import permission_required
 
 from blog.models import Blog
 from blog.services import send
@@ -21,8 +23,9 @@ class BlogCreateView(CreateView):
         return super().form_valid(form)
 
 
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(PermissionRequiredMixin, UpdateView):
     model = Blog
+    permission_required = 'blog.change_post'
     fields = ('name', 'message',)
     success_url = reverse_lazy('blog:blog')
 
@@ -62,11 +65,13 @@ class BlogDetailView(DetailView):
         return self.object
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(PermissionRequiredMixin, DeleteView):
     model = Blog
+    permission_required = 'blog.change_post'
     success_url = reverse_lazy('blog:blog')
 
 
+@permission_required('blog.change_post')
 def change_publish(request, pk):
     post_item = get_object_or_404(Blog, pk=pk)
     if post_item.published:

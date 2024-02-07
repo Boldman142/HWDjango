@@ -19,7 +19,7 @@
                         <li>- {{ object.overview }}</li>
                     </ul>
                     <button class="p-2 btn btn-outline-danger" type="submit">Подтвердить</button>
-                    <a class="p-2 btn btn-outline-primary" href="{% url 'blog:blog' %}">Отмена</a>
+                    <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:product_detail' object.pk%}">Отмена</a>
                 </div>
             </form>
         </div>

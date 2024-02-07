@@ -32,6 +32,7 @@ class Product(models.Model):
 
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                                 verbose_name='Создатель')
+    is_active = models.BooleanField(default=True, verbose_name='наличие')
 
     def __str__(self):
         return f'{self.name}'

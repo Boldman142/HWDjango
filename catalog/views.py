@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Category, Product, Version
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django import forms
 
 
@@ -14,7 +15,7 @@ class CategoryListView(ListView):
     }
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:catalog')
@@ -27,8 +28,9 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     model = Product
+    permission_required = 'catalog.change_product'
     form_class = ProductForm
 
     def get_success_url(self, *args, **kwargs):
@@ -61,7 +63,7 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
@@ -88,8 +90,9 @@ class ProductListView(ListView):
         return context_data
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
+    permission_required = 'catalog.delete_product'
     success_url = reverse_lazy('catalog:catalog')
 
 
