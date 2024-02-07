@@ -1,5 +1,25 @@
 [
   {
+    "model": "catalog.version",
+    "pk": 1,
+    "fields": {
+      "num_version": 1,
+      "product": 6,
+      "name": "Длинный тонкий",
+      "sign": false
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 2,
+    "fields": {
+      "num_version": 2,
+      "product": 6,
+      "name": "Толстый короткий",
+      "sign": false
+    }
+  },
+  {
     "model": "catalog.product",
     "pk": 1,
     "fields": {
@@ -62,6 +82,19 @@
       "price": 300,
       "date_create": "2024-01-12T13:09:24.457Z",
       "date_change": "2024-01-12T13:26:16.425Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Огурец",
+      "overview": "зеленый",
+      "picture": "",
+      "category": 3,
+      "price": 201,
+      "date_create": "2024-02-07T10:48:02.204Z",
+      "date_change": "2024-02-07T10:48:26.555Z"
     }
   },
   {

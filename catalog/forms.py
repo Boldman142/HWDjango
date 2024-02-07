@@ -10,13 +10,16 @@ class StyleForMixin:
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
+
+class FindBadWord:
+
     def search_word(self, enter):
         for word in self.danger_words:
             if word in enter.lower():
                 raise forms.ValidationError(f'Вах, дорогой, не надо так. Давай без "{word}"')
 
 
-class ProductForm(StyleForMixin, forms.ModelForm):
+class ProductForm(StyleForMixin, FindBadWord, forms.ModelForm):
     danger_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево',
                     'бесплатно', 'обман', 'полиция', 'радар']
 
@@ -35,7 +38,7 @@ class ProductForm(StyleForMixin, forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(StyleForMixin, forms.ModelForm):
+class VersionForm(StyleForMixin, FindBadWord, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
