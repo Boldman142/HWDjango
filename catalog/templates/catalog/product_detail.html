@@ -14,7 +14,9 @@
                 {% endif %}
                 <h1 class="card-title pricing-card-title">{{ object.price }}₽</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+
                     <li>- {{ object.overview }}</li>
+                    <li>- Добавил {{ object.creator|default:"уже нет его" }}</li>
 
                 </ul>
                 <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>

@@ -19,6 +19,7 @@ from .settings_local import (  # noqa: F401
     EMAIL_HOST,
     EMAIL_PORT,
     EMAIL_USE_TLS,
+    EMAIL_USE_SSL,
     DEFAULT_FROM_EMAIL
 )
 

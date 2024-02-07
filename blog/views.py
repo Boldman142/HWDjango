@@ -57,8 +57,8 @@ class BlogDetailView(DetailView):
         self.object = super().get_object(queryset)
         self.object.count_view += 1
         self.object.save()
-        # if self.object.count_view == 100:
-        #     send()
+        # if self.object.count_view > 10:
+        #     send(topic='Проверка связи', text='Меня слышно?', to=['mrsamy@rambler.ru', 'kapitan.kub@gmail.com'])
         return self.object
 
 
