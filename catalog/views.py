@@ -79,13 +79,11 @@ class ProductListView(ListView):
         prod_type = Category.objects.get(pk=self.kwargs.get('pk'))
         context_data = super().get_context_data(*args, **kwargs)
         context_data['title'] = f'Все что есть из {prod_type.name}'
-        #
-        # products = Product.objects.all()
-        # version_all = Version.object.all().filter(product_id=self.get_object().id)
-        # for product in products:
-        #     product.active_version = product.versions.filter(is_active=True).first()
-        # context_data['products'] = products
 
+        products = context_data['object_list']
+
+        for product in products:
+            product.is_active = product.version_set.filter(sign=True)
 
         return context_data
 

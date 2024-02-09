@@ -43,15 +43,15 @@ class VersionForm(StyleForMixin, FindBadWord, forms.ModelForm):
         model = Version
         fields = '__all__'
 
-    def clean_sign(self):
-        cleaned_data = self.cleaned_data.get('sign')
-        # return cleaned_data
-
-        if cleaned_data and self.instance.product.version_set.filter(sign=True).exclude(
-                id=self.instance.id).exists():
-            raise forms.ValidationError('Может существовать только одна активная версия!')
-
-        return cleaned_data
+    # def clean_sign(self):
+    #     cleaned_data = self.cleaned_data.get('sign')
+    #     # return cleaned_data
+    #
+    #     if cleaned_data and self.instance.product.version_set.filter(sign=True).exclude(
+    #             id=self.instance.id).exists():
+    #         raise forms.ValidationError('Может существовать только одна активная версия!')
+    #
+    #     return cleaned_data
 
     # def clean_sign(self):
     #     cleaned_data = self.cleaned_data.get('sign')
