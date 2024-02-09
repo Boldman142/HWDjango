@@ -27,12 +27,17 @@
                     <li> число просмотров - {{ item.count_view }}</li>
                 </ul>
                 <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post' item.pk %}">Читать</a>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_change' item.pk %}">Изменить</a>
+                {% if perms.main.change_post %}
+                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_change' item.pk %}">Изменить</a>
+
+                    {% if item.published %}
+                        <a class="btn btn-lg btn-danger btn-block" href="{% url 'blog:change_publish' item.pk %}">Не публиковать</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-success btn-block" href="{% url 'blog:change_publish' item.pk %}">Опубликовать</a>
+                    {% endif %}
+                {% endif %}
+                {% if perms.main.delete_post %}
                 <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_delete' item.pk %}">Удалить</a>
-                {% if item.published %}
-                    <a class="btn btn-lg btn-danger btn-block" href="{% url 'blog:change_publish' item.pk %}">Не публиковать</a>
-                {% else %}
-                    <a class="btn btn-lg btn-success btn-block" href="{% url 'blog:change_publish' item.pk %}">Опубликовать</a>
                 {% endif %}
             </div>
         </div>

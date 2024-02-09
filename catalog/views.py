@@ -83,7 +83,7 @@ class ProductListView(ListView):
         products = context_data['object_list']
 
         for product in products:
-            product.is_active = product.version_set.filter(sign=True)
+            product.is_active_vers = product.version_set.filter(sign=True)
 
         return context_data
 

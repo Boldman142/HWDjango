@@ -67,7 +67,7 @@ class BlogDetailView(DetailView):
 
 class BlogDeleteView(PermissionRequiredMixin, DeleteView):
     model = Blog
-    permission_required = 'blog.change_post'
+    permission_required = 'blog.delete_post'
     success_url = reverse_lazy('blog:blog')
 
 

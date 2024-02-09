@@ -19,7 +19,7 @@
                     <li>- {{ item.overview }}
                     </li>
                     {% if item.is_active %}
-                    {% for version in item.is_active %}
+                    {% for version in item.is_active_vers %}
                     <li> + {{ version }}</li>
                     {% endfor %}
                     {% endif %}
