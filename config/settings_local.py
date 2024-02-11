@@ -1,7 +1,7 @@
 # Настройки почты
 
-EMAIL_HOST_USER = 'vahtang-ashotovich@yandex.ru' #Почта откуда слать
-EMAIL_HOST_PASSWORD = 'tpizybawjfixgvja'  #Пароль для связи с SMTP сервером (типо апикея klbvxnrgqitdchlz)
+EMAIL_HOST_USER = "vahtang-ashotovich@yandex.ru" #Почта откуда слать
+EMAIL_HOST_PASSWORD = "klbvxnrgqitdchlz"  #Пароль для связи с SMTP сервером (типо апикея klbvxnrgqitdchlz  tpizybawjfixgvja )
 
 # gmail_send/settings.py
 

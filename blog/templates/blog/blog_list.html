@@ -12,35 +12,38 @@
 </div>
 <div class="row text-center">
     {% for item in object_list %}
-    <div class="col-3">
-        <div class="card mb-4 box-shadow">
-            <div class="card-header">
-                <h4 class="my-0 font-weight-normal">{{ item.slug }}</h4>
-            </div>
-            <div class="card-body">
+        {% if item.published or perms.blog.change_blog %}
+            <div class="col-3">
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">{{ item.slug }}</h4>
+                    </div>
+                    <div class="card-body">
 
-                <h1 class="card-title pricing-card-title">{{ item.name }}</h1>
-                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li> дата создания - {{ item.date_create }}</li>
-                </ul>
-                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <li> число просмотров - {{ item.count_view }}</li>
-                </ul>
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post' item.pk %}">Читать</a>
-                {% if perms.main.change_post %}
-                    <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_change' item.pk %}">Изменить</a>
+                        <h1 class="card-title pricing-card-title">{{ item.name }}</h1>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li> дата создания - {{ item.date_create }}</li>
+                        </ul>
+                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                            <li> число просмотров - {{ item.count_view }}</li>
+                        </ul>
+                        <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post' item.pk %}">Читать</a>
+                        {% if perms.blog.change_blog %}
+                            <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:blog_change' item.pk %}">Изменить</a>
 
-                    {% if item.published %}
-                        <a class="btn btn-lg btn-danger btn-block" href="{% url 'blog:change_publish' item.pk %}">Не публиковать</a>
-                    {% else %}
-                        <a class="btn btn-lg btn-success btn-block" href="{% url 'blog:change_publish' item.pk %}">Опубликовать</a>
-                    {% endif %}
-                {% endif %}
-                {% if perms.main.delete_post %}
-                <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_delete' item.pk %}">Удалить</a>
-                {% endif %}
+                            {% if item.published and perms.blog.change_blog %}
+                                <a class="btn btn-lg btn-danger btn-block" href="{% url 'blog:change_publish' item.pk %}">Не публиковать</a>
+                            {% elif perms.blog.change_blog %}
+                                <a class="btn btn-lg btn-success btn-block" href="{% url 'blog:change_publish' item.pk %}">Опубликовать</a>
+                            {% endif %}
+                        {% endif %}
+                        {% if perms.blog.delete_blog %}
+                            <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:post_delete' item.pk %}">Удалить</a>
+                        {% endif %}
+
+                </div>
             </div>
-        </div>
+        {% endif %}
     </div>
     {% endfor %}
 </div>

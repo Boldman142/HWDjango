@@ -13,6 +13,7 @@ psycopg2 = "^2.9.9"
 ipython = "^8.20.0"
 django-dump-load-utf8 = "^0.0.4"
 pytils = "^0.4.1"
+redis = "^5.0.1"
 
 
 [build-system]

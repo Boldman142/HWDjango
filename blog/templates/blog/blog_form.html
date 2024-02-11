@@ -10,7 +10,13 @@
                         <form method="post">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <button class="p-2 btn btn-outline-primary" type="submit">Отправить</button>
+                            <button class="p-2 btn btn-outline-primary" type="submit">
+                                {% if object %}
+                                    Сохранить
+                                {% else %}
+                                    Отправить
+                                {% endif %}
+                            </button>
                         </form>
                     </div>
                 </div>

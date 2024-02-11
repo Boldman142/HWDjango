@@ -62,9 +62,16 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
         #     # метод в формах, просто не пускал так сделать, а не ронял все
         return super().form_valid(form)
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.object.creator != self.request.user and not self.request.user.is_staff:
+            raise forms.ValidationError('Не можно')
+        return self.object
+
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    permission_required = 'catalog.view_product'
 
 
 class ProductListView(ListView):
