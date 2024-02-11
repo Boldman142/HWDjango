@@ -4,7 +4,7 @@
 {% block context%}
 <div class="row text-center">
     {% for item in object_list %}
-        {% if item.is_active or perms.catalog.change_product %}
+        {% if item.is_active or perms.catalog.change_product%}
             <div class="col-3">
                 <div class="card mb-4 box-shadow">
                     <div class="card-header">
@@ -23,10 +23,11 @@
                             <li> + {{ version }}</li>
                             {% endfor %}
                             {% endif %}
+                            <li>-> Добавил: {{ item.creator|default:"уже нет его" }}</li>
                         </ul>
                         <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' item.pk %}">Подробнее</a>
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                        {% if perms.catalog.change_product %}
+                        {% if perms.catalog.change_product and request.user.is_staff or item.creator == request.user %}
                         <a class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_update' item.pk %}">Изменить</a>
                         {% endif %}
                     </div>
