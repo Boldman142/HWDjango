@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.forms import inlineformset_factory
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Category, Product, Version
+from django.http import Http404
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django import forms
 
@@ -65,7 +66,7 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         if self.object.creator != self.request.user and not self.request.user.is_staff:
-            raise forms.ValidationError('Не можно')
+            raise Http404
         return self.object
 
 

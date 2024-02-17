@@ -11,7 +11,10 @@ EMAIL_HOST = 'smtp.yandex.ru'  # Протокол связи, (для гугла
 EMAIL_PORT = 465  #
 EMAIL_USE_TLS = False  #
 EMAIL_USE_SSL = True  #
-DEFAULT_FROM_EMAIL = 'vahtang-ashotovich@yandex.ru' # Откуда, если не указать в функции
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER   # Откуда, если не указать в функции
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 # Пас для базы
