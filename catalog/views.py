@@ -7,6 +7,10 @@ from catalog.models import Category, Product, Version
 from django.http import Http404
 from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django import forms
+from django.core.cache import cache
+
+from catalog.services import get_prod_categories_cache, get_categories_cache
+from config import settings
 
 
 class CategoryListView(ListView):
@@ -14,6 +18,9 @@ class CategoryListView(ListView):
     extra_context = {
         'title': 'Захади дарагой'
     }
+
+    def get_queryset(self):
+        return get_categories_cache()
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -53,14 +60,6 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
-        # num_true = Version.objects.all().filter(product_id=self.get_object().id)
-        # numm = 0
-        # for i in num_true:
-        #     if i.sign:
-        #         numm += 1
-        # if numm > 1:
-        #     raise forms.ValidationError(f'Увы, не больше одного варианта в наличии') #Как бы сделать, чтобы как клин
-        #     # метод в формах, просто не пускал так сделать, а не ронял все
         return super().form_valid(form)
 
     def get_object(self, queryset=None):
@@ -79,9 +78,8 @@ class ProductListView(ListView):
     model = Product
 
     def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(category=self.kwargs.get('pk'))
-        return queryset
+        category = self.kwargs.get('pk')
+        return get_prod_categories_cache(category)
 
     def get_context_data(self, *args, **kwargs):
         prod_type = Category.objects.get(pk=self.kwargs.get('pk'))

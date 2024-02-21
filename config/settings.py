@@ -11,22 +11,29 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .settings_local import (  # noqa: F401
-    PASSWORD_BD,
-    EMAIL_HOST_USER,
-    EMAIL_HOST_PASSWORD,
-    EMAIL_BACKEND,
-    EMAIL_HOST,
-    EMAIL_PORT,
-    EMAIL_USE_TLS,
-    EMAIL_USE_SSL,
-    DEFAULT_FROM_EMAIL,
-    SERVER_EMAIL,
-    EMAIL_ADMIN
-)
+import os
+from dotenv import load_dotenv
+
+
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
+
+PASSWORD_BD = os.getenv('PASSWORD_BD')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = os.getenv('SERVER_EMAIL')
+EMAIL_ADMIN = os.getenv('EMAIL_ADMIN')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -151,10 +158,10 @@ LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 
-
+CACHE_ENABLED = os.getenv('CACHE_ENABLED') == '1'
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": os.getenv('CACHE_LOCATION'),
     }
 }
