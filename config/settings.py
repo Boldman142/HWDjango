@@ -98,10 +98,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_work',
-        'USER': 'postgres',
-        'PASSWORD': PASSWORD_BD,
+        'ENGINE': os.getenv('ENGINE_BD'),
+        'NAME': os.getenv('NAME_BD'),
+        'USER': os.getenv('USER_BD'),
+        'PASSWORD': os.getenv('PASSWORD_BD'),
+        'HOST': os.getenv('HOST_BD'),
+        'PORT': os.getenv('PORT_BD'),
 
     }
 }
@@ -161,7 +163,7 @@ LOGIN_URL = '/'
 CACHE_ENABLED = os.getenv('CACHE_ENABLED') == '1'
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "BACKEND": os.getenv('CACHE_BACKEND'),
         "LOCATION": os.getenv('CACHE_LOCATION'),
     }
 }
